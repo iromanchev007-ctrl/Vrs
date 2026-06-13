@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VRS Автосервис — онлайн-запись за 2 минуты. Укажите марку, модель и симптомы — заявка сразу придёт менеджеру. Саратов, Дегтярная площадь 1/3." />
+  <meta name="keywords" content="автосервис Саратов, онлайн запись автосервис, ремонт авто Саратов, диагностика авто, VRS" />
+  <meta property="og:title" content="VRS Автосервис — Онлайн-запись | Саратов" />
+  <meta property="og:description" content="Укажите марку, модель и симптомы — заявка сразу придёт нашему менеджеру." />
+  <meta property="og:type" content="website" />
+  <title>VRS Автосервис — Онлайн-запись | Саратов</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #2563EB;
+      --primary-dark: #1D4ED8;
+      --primary-light: #3B82F6;
+      --dark: #060C1A;
+      --dark-2: #111827;
+      --dark-3: #1F2937;
+      --text: #374151;
+      --text-light: #6B7280;
+      --text-lighter: #9CA3AF;
+      --white: #FFFFFF;
+      --bg: #F9FAFB;
+      --bg-2: #F3F4F6;
+      --border: #E5E7EB;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --shadow: 0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg: 0 20px 48px rgba(0,0,0,0.12);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --tr: 0.22s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--text); background: var(--white); overflow-x: hidden; line-height: 1.6; }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+
+    /* LAYOUT */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 84px 0; }
+    .section-header { text-align: center; margin-bottom: 52px; }
+    .section-label {
+      display: inline-block; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--primary); background: rgba(37,99,235,0.08);
+      padding: 5px 14px; border-radius: 100px; margin-bottom: 14px;
+    }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.3rem); font-weight: 800; color: var(--dark-2); line-height: 1.2; margin-bottom: 12px; }
+    .section-sub { color: var(--text-light); font-size: 1.05rem; max-width: 540px; margin: 0 auto 0; }
+
+    /* NAVBAR */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      transition: background var(--tr), box-shadow var(--tr);
+      padding: 0 24px;
+    }
+    nav.scrolled { background: rgba(255,255,255,0.96); backdrop-filter: blur(16px); box-shadow: 0 1px 0 var(--border); }
+    .nav-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 66px; }
+    .logo { font-size: 1.5rem; font-weight: 900; color: var(--white); text-decoration: none; letter-spacing: -0.02em; transition: color var(--tr); }
+    .logo span { color: #60A5FA; }
+    nav.scrolled .logo { color: var(--dark-2); }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.8); text-decoration: none; padding: 8px 14px; border-radius: 8px; transition: all var(--tr); }
+    nav.scrolled .nav-links a { color: var(--text); }
+    .nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+    nav.scrolled .nav-links a:hover { color: var(--primary); background: var(--bg); }
+    .nav-cta { background: var(--primary) !important; color: var(--white) !important; }
+    .nav-cta:hover { background: var(--primary-dark) !important; }
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .burger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: all var(--tr); }
+    nav.scrolled .burger span { background: var(--dark-2); }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; background: var(--dark-2);
+      z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 1.25rem; font-weight: 600; color: var(--white); text-decoration: none; padding: 14px 40px; border-radius: 12px; transition: background var(--tr); }
+    .mobile-menu a:hover { background: rgba(255,255,255,0.08); }
+    .menu-close { position: absolute; top: 20px; right: 24px; background: none; border: none; color: var(--white); font-size: 1.8rem; cursor: pointer; line-height: 1; }
+
+    /* HERO */
+    #hero {
+      position: relative; min-height: 100vh; display: flex; align-items: center;
+      background: var(--dark); overflow: hidden; padding: 0;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(37,99,235,0.14) 0%, transparent 60%),
+                  radial-gradient(ellipse 40% 40% at 15% 85%, rgba(59,130,246,0.07) 0%, transparent 60%),
+                  linear-gradient(140deg, #060C1A 0%, #0B1526 55%, #0D1D40 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+    .hero-glow {
+      position: absolute; width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%);
+      top: 50%; right: -180px; transform: translateY(-50%); pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; padding: 120px 24px 80px; max-width: 1160px; margin: 0 auto; width: 100%; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: rgba(37,99,235,0.14); border: 1px solid rgba(37,99,235,0.28);
+      border-radius: 100px; padding: 7px 16px; color: #93C5FD; font-size: 0.83rem; font-weight: 500; margin-bottom: 28px;
+    }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #60A5FA; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.4)} }
+    h1 { font-size: clamp(2rem, 5.5vw, 3.6rem); font-weight: 900; color: var(--white); letter-spacing: -0.03em; line-height: 1.1; max-width: 680px; margin-bottom: 20px; }
+    h1 .hl { color: #60A5FA; }
+    .hero-sub { color: rgba(255,255,255,0.55); font-size: 1.12rem; max-width: 500px; margin-bottom: 40px; line-height: 1.75; }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 60px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px;
+      border-radius: 10px; font-size: 0.93rem; font-weight: 600; text-decoration: none;
+      cursor: pointer; border: none; transition: all var(--tr); line-height: 1; font-family: var(--font);
+    }
+    .btn-primary { background: var(--primary); color: var(--white); box-shadow: 0 4px 16px rgba(37,99,235,0.4); }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,99,235,0.5); }
+    .btn-ghost { background: rgba(255,255,255,0.07); color: var(--white); border: 1px solid rgba(255,255,255,0.14); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.13); transform: translateY(-2px); }
+    .btn-tg { background: rgba(0,136,204,0.12); color: #7DD3F8; border: 1px solid rgba(0,136,204,0.25); }
+    .btn-tg:hover { background: rgba(0,136,204,0.22); transform: translateY(-2px); }
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 36px; }
+    .hstat { border-left: 2px solid rgba(37,99,235,0.4); padding-left: 16px; }
+    .hstat-n { font-size: 1.75rem; font-weight: 900; color: var(--white); line-height: 1; margin-bottom: 4px; }
+    .hstat-l { font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* HOW IT WORKS */
+    #how { background: var(--dark-2); padding: 72px 0; }
+    #how h2 { color: var(--white); }
+    #how .section-sub { color: rgba(255,255,255,0.45); }
+    #how .section-label { background: rgba(96,165,250,0.12); color: #93C5FD; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .step {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-lg); padding: 32px 24px;
+      transition: border-color var(--tr), background var(--tr);
+    }
+    .step:hover { background: rgba(255,255,255,0.07); border-color: rgba(37,99,235,0.4); }
+    .step-n { font-size: 2.8rem; font-weight: 900; color: rgba(37,99,235,0.18); line-height: 1; margin-bottom: 16px; }
+    .step-ico { width: 46px; height: 46px; background: rgba(37,99,235,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 14px; }
+    .step h3 { color: var(--white); font-size: 0.97rem; font-weight: 600; margin-bottom: 8px; }
+    .step p { color: rgba(255,255,255,0.42); font-size: 0.85rem; line-height: 1.6; }
+
+    /* ABOUT */
+    #about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .about-grid h2 { text-align: left; }
+    .about-desc { color: var(--text-light); line-height: 1.8; margin-bottom: 32px; }
+    .perks { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .perk { display: flex; align-items: flex-start; gap: 12px; }
+    .perk-ico { width: 38px; height: 38px; min-width: 38px; background: rgba(37,99,235,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+    .perk-text { font-size: 0.855rem; font-weight: 500; color: var(--text); line-height: 1.45; padding-top: 8px; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .astat {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px 20px; text-align: center; transition: box-shadow var(--tr), transform var(--tr);
+    }
+    .astat:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .astat.blue { background: var(--primary); border-color: var(--primary); }
+    .astat-n { font-size: 2.1rem; font-weight: 900; color: var(--primary); line-height: 1; margin-bottom: 6px; }
+    .astat.blue .astat-n { color: var(--white); }
+    .astat-l { font-size: 0.78rem; color: var(--text-light); font-weight: 500; }
+    .astat.blue .astat-l { color: rgba(255,255,255,0.65); }
+
+    /* SERVICES */
+    #services { background: var(--bg); }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 44px; }
+    .tab {
+      padding: 9px 20px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--white); color: var(--text); font-size: 0.875rem; font-weight: 500;
+      cursor: pointer; transition: all var(--tr); font-family: var(--font);
+    }
+    .tab:hover { border-color: var(--primary); color: var(--primary); }
+    .tab.active { background: var(--primary); border-color: var(--primary); color: var(--white); }
+    .srv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .srv-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 28px; transition: all var(--tr); cursor: default;
+    }
+    .srv-card:hover { border-color: var(--primary); box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .srv-ico { width: 50px; height: 50px; background: rgba(37,99,235,0.08); border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 1.45rem; margin-bottom: 14px; }
+    .srv-cat { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary); margin-bottom: 6px; }
+    .srv-name { font-size: 1.08rem; font-weight: 700; color: var(--dark-2); margin-bottom: 8px; }
+    .srv-desc { font-size: 0.855rem; color: var(--text-light); line-height: 1.6; margin-bottom: 18px; }
+    .srv-footer { display: flex; align-items: center; justify-content: space-between; }
+    .srv-price { font-size: 1.05rem; font-weight: 700; color: var(--dark-2); }
+    .srv-price small { display: block; font-size: 0.72rem; font-weight: 400; color: var(--text-lighter); margin-bottom: 2px; }
+    .btn-book {
+      font-size: 0.78rem; padding: 8px 16px; border-radius: 8px;
+      background: rgba(37,99,235,0.08); color: var(--primary); font-weight: 600;
+      border: none; cursor: pointer; transition: all var(--tr); font-family: var(--font);
+    }
+    .btn-book:hover { background: var(--primary); color: var(--white); }
+
+    /* BOOKING */
+    #booking { background: var(--dark-2); padding: 84px 0; }
+    #booking .section-label { background: rgba(96,165,250,0.12); color: #93C5FD; }
+    #booking h2 { color: var(--white); }
+    .bk-grid { display: grid; grid-template-columns: 1fr 1.65fr; gap: 64px; align-items: start; }
+    .bk-info h2 { text-align: left; }
+    .bk-info p { color: rgba(255,255,255,0.48); line-height: 1.8; margin-bottom: 32px; }
+    .bk-benefits { display: flex; flex-direction: column; gap: 14px; }
+    .bk-benefit { display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.65); font-size: 0.88rem; }
+    .bk-benefit-ico { width: 36px; height: 36px; min-width: 36px; background: rgba(37,99,235,0.18); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; }
+    .form-wrap { background: var(--white); border-radius: var(--radius-lg); padding: 40px; box-shadow: 0 28px 72px rgba(0,0,0,0.32); }
+    .form-title { font-size: 1.15rem; font-weight: 700; color: var(--dark-2); margin-bottom: 24px; }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .fg { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+    .fg label { font-size: 0.82rem; font-weight: 500; color: var(--text); }
+    .fg input, .fg select, .fg textarea {
+      padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 9px;
+      font-size: 0.875rem; font-family: var(--font); color: var(--text);
+      background: var(--white); transition: border-color var(--tr), box-shadow var(--tr);
+      outline: none; width: 100%;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.11);
+    }
+    .fg textarea { resize: vertical; min-height: 88px; }
+    .fg input.err, .fg select.err { border-color: #EF4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.1); }
+    .err-msg { font-size: 0.75rem; color: #EF4444; margin-top: 3px; display: none; }
+    .err-msg.show { display: block; }
+    .f-submit {
+      width: 100%; padding: 15px; background: var(--primary); color: var(--white); border: none;
+      border-radius: 9px; font-size: 0.97rem; font-weight: 700; cursor: pointer; font-family: var(--font);
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      box-shadow: 0 4px 16px rgba(37,99,235,0.38); transition: all var(--tr); margin-top: 6px;
+    }
+    .f-submit:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,99,235,0.5); }
+    .f-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+    .f-note { text-align: center; font-size: 0.74rem; color: var(--text-lighter); margin-top: 10px; }
+    .f-success { display: none; text-align: center; padding: 52px 20px; }
+    .f-success-ico { width: 72px; height: 72px; background: rgba(16,185,129,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 20px; }
+    .f-success h3 { color: var(--dark-2); font-size: 1.3rem; margin-bottom: 8px; }
+    .f-success p { color: var(--text-light); font-size: 0.9rem; }
+
+    /* ADDRESS */
+    #address { background: var(--white); }
+    .addr-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: start; }
+    .addr-blocks { display: flex; flex-direction: column; gap: 16px; }
+    .addr-block {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 18px 20px; border: 1px solid var(--border); border-radius: var(--radius);
+      transition: box-shadow var(--tr);
+    }
+    .addr-block:hover { box-shadow: var(--shadow); }
+    .addr-ico { width: 42px; height: 42px; min-width: 42px; background: rgba(37,99,235,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; }
+    .addr-lbl { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-lighter); margin-bottom: 4px; }
+    .addr-val { font-size: 0.93rem; color: var(--dark-2); font-weight: 500; line-height: 1.5; }
+    .addr-val a { color: var(--primary); text-decoration: none; }
+    .addr-val a:hover { text-decoration: underline; }
+    .hours-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 0.855rem; }
+    .hours-row:not(:last-child) { border-bottom: 1px solid var(--bg-2); }
+    .hours-day { color: var(--text); }
+    .hours-time { font-weight: 600; color: var(--dark-2); }
+    .hours-time.off { color: #EF4444; }
+    .hours-row.today .hours-day { color: var(--primary); font-weight: 600; }
+    .map-box { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); height: 380px; }
+    .map-box iframe { width: 100%; height: 100%; border: none; display: block; }
+
+    /* CONTACT */
+    #contact { background: var(--bg); padding: 64px 0; }
+    .cta-strip { background: var(--primary); border-radius: var(--radius-lg); padding: 48px 40px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; margin-bottom: 48px; }
+    .cta-strip h2 { color: var(--white); margin-bottom: 6px; font-size: clamp(1.3rem,3vw,1.8rem); }
+    .cta-strip p { color: rgba(255,255,255,0.65); font-size: 0.93rem; }
+    .cta-strip .btn { background: var(--white); color: var(--primary); font-weight: 700; white-space: nowrap; }
+    .cta-strip .btn:hover { background: rgba(255,255,255,0.9); transform: translateY(-2px); }
+    .contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+    .cc {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px 20px; text-align: center; transition: all var(--tr);
+    }
+    .cc:hover { border-color: var(--primary); box-shadow: var(--shadow); transform: translateY(-3px); }
+    .cc-ico { width: 52px; height: 52px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin: 0 auto 14px; }
+    .cc-lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-lighter); margin-bottom: 6px; }
+    .cc-val { font-size: 1rem; font-weight: 700; color: var(--dark-2); text-decoration: none; display: block; }
+    .cc-val:hover { color: var(--primary); }
+
+    /* FOOTER */
+    footer { background: var(--dark); color: rgba(255,255,255,0.45); padding: 44px 0 24px; }
+    .foot-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
+    .foot-logo { font-size: 1.4rem; font-weight: 900; color: var(--white); margin-bottom: 12px; letter-spacing: -0.02em; }
+    .foot-logo span { color: #60A5FA; }
+    .foot-desc { font-size: 0.84rem; line-height: 1.7; margin-bottom: 14px; }
+    .foot-head { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.09em; color: rgba(255,255,255,0.28); margin-bottom: 16px; }
+    .foot-links { display: flex; flex-direction: column; gap: 9px; }
+    .foot-links a { font-size: 0.855rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color var(--tr); }
+    .foot-links a:hover { color: var(--white); }
+    .foot-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 22px; display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; flex-wrap: wrap; gap: 8px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .about-grid, .bk-grid, .addr-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-stats { grid-template-columns: repeat(4,1fr); }
+      .foot-inner { grid-template-columns: 1fr 1fr; }
+      section { padding: 64px 0; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .burger { display: flex; }
+      .f-row { grid-template-columns: 1fr; }
+      .perks { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .form-wrap { padding: 28px 18px; }
+      .cta-strip { text-align: center; justify-content: center; }
+      .foot-inner { grid-template-columns: 1fr; gap: 28px; }
+      .foot-bottom { flex-direction: column; text-align: center; }
+      .hero-btns { flex-direction: column; align-items: flex-start; }
+      .steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .steps { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spin { display: inline-block; animation: spin 0.9s linear infinite; }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="logo">VR<span>S</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">О нас</a></li>
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#address">Адрес</a></li>
+      <li><a href="#booking" class="nav-cta">Записаться</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="menu-close" id="menuClose">&#10005;</button>
+  <a href="#about">О нас</a>
+  <a href="#services">Услуги</a>
+  <a href="#address">Адрес</a>
+  <a href="#booking">Записаться</a>
+  <a href="tel:+79376301227">+7 937 630-12-27</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Онлайн-запись за 2 минуты
+    </div>
+    <h1>Запишитесь<br>в сервис <span class="hl">без звонков</span></h1>
+    <p class="hero-sub">
+      Укажите марку, модель и симптомы — заявка сразу придёт менеджеру.
+      Свяжемся в течение&nbsp;15&nbsp;минут.
+    </p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn btn-primary">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+        Оставить заявку
+      </a>
+      <a href="tel:+79376301227" class="btn btn-ghost">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Позвонить
+      </a>
+      <a href="https://t.me/ilya4u" target="_blank" rel="noopener" class="btn btn-tg">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Telegram
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-n">5+</div><div class="hstat-l">лет работы</div></div>
+      <div class="hstat"><div class="hstat-n">1000+</div><div class="hstat-l">клиентов</div></div>
+      <div class="hstat"><div class="hstat-n">15 мин</div><div class="hstat-l">время ответа</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section id="how">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Как это работает</div>
+      <h2>Запись за 3 простых шага</h2>
+      <p class="section-sub">Никаких ожиданий на линии — просто заполните форму</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-n">01</div>
+        <div class="step-ico">📋</div>
+        <h3>Заполните заявку</h3>
+        <p>Укажите марку, модель, симптомы и удобное время для визита</p>
+      </div>
+      <div class="step reveal d1">
+        <div class="step-n">02</div>
+        <div class="step-ico">⚡</div>
+        <h3>Заявка — менеджеру</h3>
+        <p>Заявка сразу приходит в Telegram нашему специалисту</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-n">03</div>
+        <div class="step-ico">📞</div>
+        <h3>Мы перезваниваем</h3>
+        <p>Свяжемся в течение 15 минут и согласуем дату и время</p>
+      </div>
+      <div class="step reveal d3">
+        <div class="step-n">04</div>
+        <div class="step-ico">🔧</div>
+        <h3>Приезжаете — делаем</h3>
+        <p>Профессиональный ремонт и диагностика по прозрачным ценам</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-label">О компании</div>
+        <h2>VRS — надёжный автосервис в Саратове</h2>
+        <p class="about-desc">
+          Специализируемся на диагностике, ремонте и техническом обслуживании автомобилей всех марок.
+          Современное оборудование, опытные мастера и прозрачное ценообразование.<br><br>
+          Каждый клиент получает детальную консультацию: объясняем что нашли, что нужно сделать и почему.
+        </p>
+        <div class="perks">
+          <div class="perk"><div class="perk-ico">🔍</div><div class="perk-text">Компьютерная диагностика всех систем</div></div>
+          <div class="perk"><div class="perk-ico">🛡️</div><div class="perk-text">Гарантия на все виды работ</div></div>
+          <div class="perk"><div class="perk-ico">💰</div><div class="perk-text">Честные цены без скрытых доплат</div></div>
+          <div class="perk"><div class="perk-ico">⏱️</div><div class="perk-text">Работаем быстро и в срок</div></div>
+          <div class="perk"><div class="perk-ico">🏆</div><div class="perk-text">Опытные сертифицированные мастера</div></div>
+          <div class="perk"><div class="perk-ico">📱</div><div class="perk-text">Онлайн-запись 24/7</div></div>
+        </div>
+      </div>
+      <div class="about-stats reveal d2">
+        <div class="astat"><div class="astat-n">5+</div><div class="astat-l">лет на рынке</div></div>
+        <div class="astat blue"><div class="astat-n">1000+</div><div class="astat-l">клиентов</div></div>
+        <div class="astat"><div class="astat-n">98%</div><div class="astat-l">довольных клиентов</div></div>
+        <div class="astat"><div class="astat-n">100%</div><div class="astat-l">гарантия качества</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Услуги и цены</div>
+      <h2>Что мы делаем</h2>
+      <p class="section-sub">Полный спектр работ по ремонту и обслуживанию автомобилей</p>
+    </div>
+    <div class="tabs">
+      <button class="tab active" data-f="all">Все услуги</button>
+      <button class="tab" data-f="d">Диагностика</button>
+      <button class="tab" data-f="s">Обслуживание</button>
+      <button class="tab" data-f="r">Ремонт</button>
+    </div>
+    <div class="srv-grid" id="srvGrid"></div>
+  </div>
+</section>
+
+<!-- ===== BOOKING ===== -->
+<section id="booking">
+  <div class="container">
+    <div class="bk-grid">
+      <div class="bk-info reveal">
+        <div class="section-label">Онлайн-запись</div>
+        <h2>Оставьте заявку — мы позвоним</h2>
+        <p>Укажите марку, модель и опишите симптомы. Заявка сразу придёт менеджеру — свяжемся в течение 15 минут.</p>
+        <div class="bk-benefits">
+          <div class="bk-benefit"><div class="bk-benefit-ico">⚡</div>Ответ в течение 15 минут</div>
+          <div class="bk-benefit"><div class="bk-benefit-ico">🗓️</div>Запись на удобное время</div>
+          <div class="bk-benefit"><div class="bk-benefit-ico">💬</div>Бесплатная предварительная консультация</div>
+          <div class="bk-benefit"><div class="bk-benefit-ico">🔒</div>Ваши данные в безопасности</div>
+        </div>
+      </div>
+      <div class="form-wrap reveal d2">
+        <div id="formBody">
+          <div class="form-title">Заявка на обслуживание</div>
+          <form id="bookForm" novalidate>
+            <div class="f-row">
+              <div class="fg">
+                <label for="fn">Ваше имя *</label>
+                <input type="text" id="fn" placeholder="Иван" />
+                <span class="err-msg" id="fn-e">Укажите ваше имя</span>
+              </div>
+              <div class="fg">
+                <label for="fp">Телефон *</label>
+                <input type="tel" id="fp" placeholder="+7 900 000-00-00" />
+                <span class="err-msg" id="fp-e">Введите корректный номер</span>
+              </div>
+            </div>
+            <div class="fg">
+              <label for="fe">Email</label>
+              <input type="email" id="fe" placeholder="ivan@example.com" />
+            </div>
+            <div class="f-row">
+              <div class="fg">
+                <label for="fmake">Марка автомобиля *</label>
+                <select id="fmake">
+                  <option value="">Выберите марку</option>
+                </select>
+                <span class="err-msg" id="fmake-e">Выберите марку</span>
+              </div>
+              <div class="fg">
+                <label for="fmodel">Модель *</label>
+                <select id="fmodel" disabled>
+                  <option value="">Сначала выберите марку</option>
+                </select>
+                <span class="err-msg" id="fmodel-e">Выберите модель</span>
+              </div>
+            </div>
+            <div class="fg">
+              <label for="fsvc">Услуга *</label>
+              <select id="fsvc">
+                <option value="">Выберите услугу</option>
+                <option>Компьютерная диагностика</option>
+                <option>Диагностика подвески</option>
+                <option>Комплексная диагностика</option>
+                <option>Диагностика перед покупкой</option>
+                <option>Ремонт двигателя</option>
+                <option>Ремонт подвески</option>
+                <option>Ремонт автоэлектрики</option>
+                <option>Замена тормозных колодок</option>
+                <option>Техническое обслуживание (ТО)</option>
+                <option>Промывка топливной системы</option>
+                <option>Заправка кондиционера</option>
+                <option>Чистка топливных форсунок</option>
+                <option>3D сход-развал</option>
+                <option>Другое</option>
+              </select>
+              <span class="err-msg" id="fsvc-e">Выберите услугу</span>
+            </div>
+            <div class="fg">
+              <label for="fc">Симптомы / комментарий</label>
+              <textarea id="fc" placeholder="Расскажите, что происходит с автомобилем…"></textarea>
+            </div>
+            <button type="submit" class="f-submit" id="submitBtn">
+              <svg width="17" height="17" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+              Отправить заявку
+            </button>
+            <p class="f-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+          </form>
+        </div>
+        <div class="f-success" id="formSuccess">
+          <div class="f-success-ico">✅</div>
+          <h3>Заявка принята!</h3>
+          <p>Спасибо! Мы свяжемся с вами в ближайшее время.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ADDRESS ===== -->
+<section id="address">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Где нас найти</div>
+      <h2>Адрес и время работы</h2>
+    </div>
+    <div class="addr-grid">
+      <div class="addr-blocks">
+        <div class="addr-block reveal">
+          <div class="addr-ico">📍</div>
+          <div>
+            <div class="addr-lbl">Адрес</div>
+            <div class="addr-val">Дегтярная площадь, 1/3<br>Саратов, помещение 22</div>
+          </div>
+        </div>
+        <div class="addr-block reveal d1">
+          <div class="addr-ico">🕐</div>
+          <div style="width:100%">
+            <div class="addr-lbl">Время работы</div>
+            <div id="hoursTable">
+              <div class="hours-row" data-day="1"><span class="hours-day">Понедельник</span><span class="hours-time">09:00 – 19:00</span></div>
+              <div class="hours-row" data-day="2"><span class="hours-day">Вторник</span><span class="hours-time">09:00 – 19:00</span></div>
+              <div class="hours-row" data-day="3"><span class="hours-day">Среда</span><span class="hours-time">09:00 – 19:00</span></div>
+              <div class="hours-row" data-day="4"><span class="hours-day">Четверг</span><span class="hours-time">09:00 – 19:00</span></div>
+              <div class="hours-row" data-day="5"><span class="hours-day">Пятница</span><span class="hours-time">09:00 – 19:00</span></div>
+              <div class="hours-row" data-day="6"><span class="hours-day">Суббота</span><span class="hours-time off">Выходной</span></div>
+              <div class="hours-row" data-day="0"><span class="hours-day">Воскресенье</span><span class="hours-time off">Выходной</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="addr-block reveal d2">
+          <div class="addr-ico">📞</div>
+          <div>
+            <div class="addr-lbl">Телефон</div>
+            <div class="addr-val"><a href="tel:+79376301227">+7 937 630-12-27</a></div>
+          </div>
+        </div>
+        <div class="addr-block reveal d3">
+          <div class="addr-ico">✈️</div>
+          <div>
+            <div class="addr-lbl">Telegram</div>
+            <div class="addr-val"><a href="https://t.me/ilya4u" target="_blank" rel="noopener">@ilya4u</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="map-box reveal d2">
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?ll=45.988981%2C51.512985&z=17&pt=45.988981%2C51.512985%2Cpm2rdm&l=map&lang=ru_RU"
+          title="VRS Автосервис — Саратов, Дегтярная площадь 1/3"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="container">
+    <div class="cta-strip reveal">
+      <div>
+        <h2>Готовы записаться?</h2>
+        <p>Оставьте заявку — ответим в течение 15 минут</p>
+      </div>
+      <a href="#booking" class="btn">Оставить заявку →</a>
+    </div>
+    <div class="contact-cards">
+      <div class="cc reveal">
+        <div class="cc-ico" style="background:rgba(37,99,235,0.08)">📞</div>
+        <div class="cc-lbl">Телефон</div>
+        <a href="tel:+79376301227" class="cc-val">+7 937 630-12-27</a>
+      </div>
+      <div class="cc reveal d1">
+        <div class="cc-ico" style="background:rgba(0,136,204,0.08)">✈️</div>
+        <div class="cc-lbl">Telegram</div>
+        <a href="https://t.me/ilya4u" target="_blank" rel="noopener" class="cc-val">@ilya4u</a>
+      </div>
+      <div class="cc reveal d2">
+        <div class="cc-ico" style="background:rgba(234,88,12,0.08)">✉️</div>
+        <div class="cc-lbl">Email</div>
+        <a href="mailto:vrs.saratov@yandex.ru" class="cc-val">vrs.saratov@yandex.ru</a>
+      </div>
+      <div class="cc reveal d3">
+        <div class="cc-ico" style="background:rgba(16,185,129,0.08)">📍</div>
+        <div class="cc-lbl">Адрес</div>
+        <span class="cc-val" style="font-size:0.88rem;cursor:default">Дегтярная пл. 1/3, пом. 22</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="foot-inner">
+      <div>
+        <div class="foot-logo">VR<span>S</span></div>
+        <p class="foot-desc">Профессиональный автосервис в Саратове. Диагностика, ремонт и обслуживание автомобилей всех марок.</p>
+        <a href="tel:+79376301227" style="color:rgba(255,255,255,0.6);font-size:0.875rem;text-decoration:none">+7 937 630-12-27</a>
+      </div>
+      <div>
+        <div class="foot-head">Навигация</div>
+        <div class="foot-links">
+          <a href="#about">О компании</a>
+          <a href="#services">Услуги и цены</a>
+          <a href="#booking">Записаться</a>
+          <a href="#address">Адрес</a>
+          <a href="#contact">Контакты</a>
+        </div>
+      </div>
+      <div>
+        <div class="foot-head">Контакты</div>
+        <div class="foot-links">
+          <a href="tel:+79376301227">+7 937 630-12-27</a>
+          <a href="https://t.me/ilya4u" target="_blank" rel="noopener">Telegram: @ilya4u</a>
+          <a href="mailto:vrs.saratov@yandex.ru">vrs.saratov@yandex.ru</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 VRS Автосервис. Все права защищены.</span>
+      <span>Саратов, Дегтярная площадь, 1/3, пом. 22</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── TELEGRAM CONFIG ────────────────────────────────────────────────────────
+// 1. Откройте @BotFather → /newbot → получите TOKEN
+// 2. Напишите боту любое сообщение, затем перейдите:
+//    https://api.telegram.org/bot<TOKEN>/getUpdates — скопируйте "id" из "chat"
+// 3. Вставьте TOKEN и CHAT_ID ниже
+const TG_TOKEN   = 'YOUR_BOT_TOKEN_HERE';
+const TG_CHAT_ID = 'YOUR_CHAT_ID_HERE';
+// ────────────────────────────────────────────────────────────────────────────
+
+// ─── SERVICES DATA ──────────────────────────────────────────────────────────
+const SERVICES = [
+  { f:'d', ico:'🔌', cat:'Диагностика',    name:'Компьютерная диагностика',   desc:'Чтение и расшифровка кодов неисправностей, рекомендации по устранению.',                           price:'от 1 000 ₽' },
+  { f:'d', ico:'🔩', cat:'Диагностика',    name:'Диагностика подвески',        desc:'Полная проверка подвески, поиск неисправностей, рекомендации клиенту.',                              price:'от 1 000 ₽' },
+  { f:'d', ico:'🔎', cat:'Диагностика',    name:'Комплексная диагностика',     desc:'Полная проверка авто: двигатель, КПП, подвеска, тех. жидкости, калькуляция.',                       price:'от 2 500 ₽' },
+  { f:'d', ico:'✅', cat:'Диагностика',    name:'Диагностика перед покупкой',  desc:'Комплексная диагностика технического состояния авто и проверка ЛКП.',                               price:'от 3 000 ₽' },
+  { f:'s', ico:'⛽', cat:'Обслуживание',   name:'Промывка топливной системы',  desc:'В цену входит жидкость для промывки 1 л (Liqui Moly). Быстро и эффективно.',                       price:'от 4 000 ₽' },
+  { f:'s', ico:'❄️', cat:'Обслуживание',   name:'Заправка кондиционера',       desc:'Заправка фреоном (стоимость фреона и масла не входит). В подарок — диагностика системы.',          price:'от 2 500 ₽' },
+  { f:'s', ico:'🛞', cat:'Обслуживание',   name:'Замена тормозных колодок',    desc:'Замена передних или задних тормозных колодок с профилактикой тормозных механизмов.',               price:'от 2 000 ₽' },
+  { f:'s', ico:'🔧', cat:'Обслуживание',   name:'Техническое обслуживание',    desc:'Входит: замена масла двигателя, фильтров, проверка всех систем автомобиля.',                       price:'от 2 500 ₽' },
+  { f:'r', ico:'🏎️', cat:'Ремонт',         name:'Ремонт двигателя',            desc:'Восстановление и ремонт компонентов двигателя — частичный и капитальный ремонт.',                  price:'по запросу'  },
+  { f:'r', ico:'⚡', cat:'Ремонт',         name:'Ремонт автоэлектрики',        desc:'Диагностика и ремонт электрических систем: проводка, датчики, блоки управления.',                  price:'по запросу'  },
+  { f:'r', ico:'💉', cat:'Ремонт',         name:'Чистка топливных форсунок',   desc:'Удаление отложений из форсунок для правильной подачи топлива и работы двигателя.',                 price:'по запросу'  },
+  { f:'r', ico:'📐', cat:'Ремонт',         name:'3D сход-развал',              desc:'Настройка геометрии колёс и подвески для равномерного износа шин и безопасности.',                  price:'по запросу'  },
+];
+
+// ─── CARS DATA ───────────────────────────────────────────────────────────────
+const CARS = {
+  'ВАЗ (Lada)':     ['2101','2105','2107','2109','2110','2114','2115','Granta','Priora','Kalina','Largus','Niva 4x4','Niva Travel','Vesta','XRAY'],
+  'Toyota':         ['Camry','Corolla','RAV4','Land Cruiser','Prado','Fortuner','Hilux','Yaris','Avensis','Auris','C-HR','Highlander'],
+  'Volkswagen':     ['Polo','Golf','Passat','Tiguan','Touareg','Jetta','Touran','Amarok','Arteon','T-Roc'],
+  'Hyundai':        ['Solaris','Tucson','Santa Fe','Creta','Elantra','i30','Sonata','Accent','ix35','Palisade'],
+  'Kia':            ['Rio','Sportage','Sorento','Ceed','Optima','Stinger','Seltos','Carnival','Mohave','Picanto'],
+  'BMW':            ['3 Series','5 Series','7 Series','X1','X3','X5','X6','X7','1 Series','6 Series'],
+  'Mercedes-Benz':  ['C-Class','E-Class','S-Class','GLE','GLC','GLK','A-Class','B-Class','CLA','GLS','Vito','Sprinter'],
+  'Audi':           ['A3','A4','A5','A6','A7','A8','Q3','Q5','Q7','Q8','TT'],
+  'Ford':           ['Focus','Mondeo','Kuga','Explorer','Mustang','EcoSport','Ranger','Transit'],
+  'Skoda':          ['Octavia','Rapid','Fabia','Superb','Kodiaq','Karoq','Yeti'],
+  'Renault':        ['Logan','Sandero','Duster','Megane','Laguna','Captur','Koleos','Fluence','Arkana'],
+  'Nissan':         ['Qashqai','X-Trail','Juke','Almera','Tiida','Murano','Navara','Patrol','Note'],
+  'Mazda':          ['Mazda3','Mazda6','CX-3','CX-5','CX-9','CX-30','MX-5'],
+  'Mitsubishi':     ['Lancer','Outlander','Pajero','ASX','Eclipse Cross','L200','Galant'],
+  'Honda':          ['Civic','Accord','CR-V','HR-V','Jazz','Pilot'],
+  'Chevrolet':      ['Cruze','Lacetti','Captiva','Cobalt','Aveo','Trax','Orlando'],
+  'Opel':           ['Astra','Vectra','Insignia','Corsa','Meriva','Zafira','Antara','Mokka'],
+  'Subaru':         ['Impreza','Legacy','Outback','Forester','XV','WRX','BRZ'],
+  'Lexus':          ['IS','ES','GS','LS','RX','NX','LX','GX','UX'],
+  'Infiniti':       ['Q50','Q70','QX50','QX60','QX80','G35','G37'],
+  'Volvo':          ['S60','S80','S90','V40','V60','V90','XC40','XC60','XC90'],
+  'Land Rover':     ['Discovery','Discovery Sport','Range Rover','Range Rover Sport','Freelander','Defender'],
+  'Porsche':        ['Cayenne','Macan','Panamera','911','Boxster','Cayman'],
+  'Geely':          ['Atlas','Coolray','Tugella','Emgrand','Monjaro','Preface'],
+  'Haval':          ['F7','F7x','Jolion','H6','H9'],
+  'Chery':          ['Tiggo 4','Tiggo 7 Pro','Tiggo 8','Arrizo'],
+  'Daewoo':         ['Nexia','Matiz','Lanos','Nubira','Sens'],
+  'Другое':         ['Другая модель'],
+};
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initNav();
+  initMobileMenu();
+  initReveal();
+  initServices();
+  initCars();
+  initForm();
+  highlightToday();
+});
+
+// NAV SCROLL
+function initNav() {
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
+}
+
+// MOBILE MENU
+function initMobileMenu() {
+  const burger = document.getElementById('burger');
+  const menu   = document.getElementById('mobileMenu');
+  const close  = document.getElementById('menuClose');
+  burger.addEventListener('click', () => menu.classList.add('open'));
+  close.addEventListener('click',  () => menu.classList.remove('open'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+}
+
+// SCROLL REVEAL
+function initReveal() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}
+
+// SERVICES GRID
+function initServices() {
+  const grid = document.getElementById('srvGrid');
+  SERVICES.forEach(s => {
+    const c = document.createElement('div');
+    c.className = 'srv-card';
+    c.dataset.f = s.f;
+    c.innerHTML = `
+      <div class="srv-ico">${s.ico}</div>
+      <div class="srv-cat">${s.cat}</div>
+      <div class="srv-name">${s.name}</div>
+      <div class="srv-desc">${s.desc}</div>
+      <div class="srv-footer">
+        <div class="srv-price"><small>стоимость</small>${s.price}</div>
+        <button class="btn-book" onclick="pickService('${s.name}')">Записаться</button>
+      </div>`;
+    grid.appendChild(c);
+  });
+
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.f;
+      document.querySelectorAll('.srv-card').forEach(c => {
+        c.style.display = (f === 'all' || c.dataset.f === f) ? 'block' : 'none';
+      });
+    });
+  });
+}
+
+window.pickService = function(name) {
+  document.getElementById('fsvc').value = name;
+  document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+};
+
+// CAR SELECTS
+function initCars() {
+  const makeEl  = document.getElementById('fmake');
+  const modelEl = document.getElementById('fmodel');
+
+  Object.keys(CARS).sort().forEach(make => {
+    const o = document.createElement('option');
+    o.value = o.textContent = make;
+    makeEl.appendChild(o);
+  });
+
+  makeEl.addEventListener('change', () => {
+    const models = CARS[makeEl.value] || [];
+    modelEl.innerHTML = '';
+    modelEl.disabled = !models.length;
+    if (!models.length) { modelEl.innerHTML = '<option>Выберите марку</option>'; return; }
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = 'Выберите модель';
+    modelEl.appendChild(def);
+    models.forEach(m => {
+      const o = document.createElement('option');
+      o.value = o.textContent = m;
+      modelEl.appendChild(o);
+    });
+  });
+}
+
+// PHONE MASK
+function maskPhone(el) {
+  el.addEventListener('input', () => {
+    let v = el.value.replace(/\D/g, '');
+    if (v.startsWith('8')) v = '7' + v.slice(1);
+    if (!v.startsWith('7') && v.length) v = '7' + v;
+    v = v.slice(0, 11);
+    let r = '+7';
+    if (v.length > 1) r += ' ' + v.slice(1, 4);
+    if (v.length > 4) r += ' ' + v.slice(4, 7);
+    if (v.length > 7) r += '-' + v.slice(7, 9);
+    if (v.length > 9) r += '-' + v.slice(9, 11);
+    el.value = r;
+  });
+}
+
+// FORM
+function initForm() {
+  const phoneEl = document.getElementById('fp');
+  maskPhone(phoneEl);
+
+  document.getElementById('bookForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin">⏳</span> Отправляем…';
+
+    const d = {
+      name:    document.getElementById('fn').value.trim(),
+      phone:   document.getElementById('fp').value.trim(),
+      email:   document.getElementById('fe').value.trim(),
+      make:    document.getElementById('fmake').value,
+      model:   document.getElementById('fmodel').value,
+      service: document.getElementById('fsvc').value,
+      comment: document.getElementById('fc').value.trim(),
+    };
+
+    const msg = [
+      '🚗 *Новая заявка — VRS Автосервис*',
+      '',
+      `👤 *Клиент:* ${d.name}`,
+      `📞 *Телефон:* ${d.phone}`,
+      d.email ? `✉️ *Email:* ${d.email}` : '',
+      '',
+      `🚗 *Автомобиль:* ${d.make} ${d.model}`,
+      `🔧 *Услуга:* ${d.service}`,
+      d.comment ? `\n💬 *Симптомы:*\n${d.comment}` : '',
+      '',
+      `⏰ *Время:* ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Saratov' })}`,
+    ].filter(l => l !== null).join('\n').trim();
+
+    try {
+      if (TG_TOKEN !== 'YOUR_BOT_TOKEN_HERE') {
+        const r = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: TG_CHAT_ID, text: msg, parse_mode: 'Markdown' }),
+        });
+        if (!r.ok) throw new Error();
+      } else {
+        // Demo mode — simulate delay
+        await new Promise(res => setTimeout(res, 1000));
+      }
+      document.getElementById('formBody').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } catch {
+      btn.disabled = false;
+      btn.innerHTML = '⚠️ Ошибка — попробуйте снова';
+      setTimeout(() => {
+        btn.innerHTML = '<svg width="17" height="17" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg> Отправить заявку';
+      }, 3000);
+    }
+  });
+}
+
+function validate() {
+  let ok = true;
+  const checks = [
+    { id: 'fn',     errId: 'fn-e',     test: v => v.trim().length > 0 },
+    { id: 'fp',     errId: 'fp-e',     test: v => v.replace(/\D/g,'').length === 11 },
+    { id: 'fmake',  errId: 'fmake-e',  test: v => v !== '' },
+    { id: 'fmodel', errId: 'fmodel-e', test: v => v !== '' },
+    { id: 'fsvc',   errId: 'fsvc-e',   test: v => v !== '' },
+  ];
+  checks.forEach(({ id, errId, test }) => {
+    const el = document.getElementById(id);
+    const errEl = document.getElementById(errId);
+    if (!test(el.value)) {
+      el.classList.add('err');
+      if (errEl) errEl.classList.add('show');
+      if (ok) { el.focus(); ok = false; }
+    } else {
+      el.classList.remove('err');
+      if (errEl) errEl.classList.remove('show');
+    }
+  });
+  return ok;
+}
+
+// HIGHLIGHT TODAY
+function highlightToday() {
+  const today = new Date().getDay(); // 0=Sun
+  document.querySelectorAll('#hoursTable .hours-row').forEach(row => {
+    if (parseInt(row.dataset.day) === today) row.classList.add('today');
+  });
+}
+</script>
+</body>
+</html>

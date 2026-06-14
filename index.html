@@ -528,6 +528,7 @@
                 <select id="fmodel" disabled>
                   <option value="">Сначала выберите марку</option>
                 </select>
+                <input type="text" id="fmodel-custom" placeholder="Введите модель" style="display:none;margin-top:8px" />
                 <span class="err-msg" id="fmodel-e">Выберите модель</span>
               </div>
             </div>
@@ -828,9 +829,13 @@ function initCars() {
     makeEl.appendChild(o);
   });
 
+  const customInput = document.getElementById('fmodel-custom');
+
   makeEl.addEventListener('change', () => {
     const models = CARS[makeEl.value] || [];
     modelEl.innerHTML = '';
+    customInput.style.display = 'none';
+    customInput.value = '';
     modelEl.disabled = !models.length;
     if (!models.length) { modelEl.innerHTML = '<option>Выберите марку</option>'; return; }
     const def = document.createElement('option');
@@ -841,6 +846,16 @@ function initCars() {
       o.value = o.textContent = m;
       modelEl.appendChild(o);
     });
+    const custom = document.createElement('option');
+    custom.value = '__custom__'; custom.textContent = 'Ввести вручную…';
+    modelEl.appendChild(custom);
+  });
+
+  modelEl.addEventListener('change', () => {
+    const isCustom = modelEl.value === '__custom__';
+    customInput.style.display = isCustom ? '' : 'none';
+    if (!isCustom) customInput.value = '';
+    if (isCustom) customInput.focus();
   });
 }
 
@@ -878,7 +893,9 @@ function initForm() {
       phone:   document.getElementById('fp').value.trim(),
       email:   document.getElementById('fe').value.trim(),
       make:    document.getElementById('fmake').value,
-      model:   document.getElementById('fmodel').value,
+      model:   document.getElementById('fmodel').value === '__custom__'
+               ? document.getElementById('fmodel-custom').value.trim()
+               : document.getElementById('fmodel').value,
       service: document.getElementById('fsvc').value,
       comment: document.getElementById('fc').value.trim(),
     };
@@ -927,7 +944,7 @@ function validate() {
     { id: 'fn',     errId: 'fn-e',     test: v => v.trim().length > 0 },
     { id: 'fp',     errId: 'fp-e',     test: v => v.replace(/\D/g,'').length === 11 },
     { id: 'fmake',  errId: 'fmake-e',  test: v => v !== '' },
-    { id: 'fmodel', errId: 'fmodel-e', test: v => v !== '' },
+    { id: 'fmodel', errId: 'fmodel-e', test: v => v !== '' && v !== '__custom__' || document.getElementById('fmodel-custom').value.trim() !== '' },
     { id: 'fsvc',   errId: 'fsvc-e',   test: v => v !== '' },
   ];
   checks.forEach(({ id, errId, test }) => {
